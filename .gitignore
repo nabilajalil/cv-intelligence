@@ -38,3 +38,11 @@ Thumbs.db
 cv_intelligence/Agentic RAG CV Analysis.html
 cv_intelligence/Agentic RAG CV Analysis_files/
 *:Zone.Identifier
+
+# Local lesson documents and temporary office files
+*.odt
+*~
+~$*
+
+# Old dashboard backup
+cv_intelligence/dashboard_before_phase7.py
