@@ -49,7 +49,7 @@ from scripts.demo_privacy_safe_graph_answers import (
     make_safe_registry,
 )
 
-from scripts.demo_claim_validated_graph_answers import (
+from scripts.graphrag.demo_claim_validated_graph_answers import (
     build_claims,
     validate_all_claims,
 )

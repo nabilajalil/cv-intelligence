@@ -15,7 +15,7 @@ from scripts.validate_semantic_claims import (
     validate_claim,
 )
 
-from scripts.demo_claim_validated_graph_answers import (
+from scripts.graphrag.demo_claim_validated_graph_answers import (
     build_claims,
     validate_all_claims,
     render_answer,

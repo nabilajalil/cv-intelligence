@@ -20,7 +20,7 @@ from scripts.validate_semantic_claims import (
     validate_claim,
 )
 
-from scripts.demo_claim_validated_graph_answers import (
+from scripts.graphrag.demo_claim_validated_graph_answers import (
     render_answer,
 )
 
