@@ -26,7 +26,7 @@ import pymupdf
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from scripts.extract_scanned_cv_vision import (
+from scripts.multimodal.extract_scanned_cv_vision import (
     CVProfile,
     extract_with_vision,
     render_first_page,

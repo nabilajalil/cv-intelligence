@@ -24,7 +24,7 @@ from scripts.document_fingerprints import sha256_file
 from scripts.demo_protected_grounded_answers import (
     PROTECTED_REPORT_PATH,
 )
-from scripts.multimodal_claim_safety_gate import load_json
+from scripts.multimodal.multimodal_claim_safety_gate import load_json
 
 
 OUTPUT_DIR = Path(

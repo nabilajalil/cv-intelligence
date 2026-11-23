@@ -19,21 +19,21 @@ Run:
 import copy
 import unittest
 
-from scripts.demo_multimodal_retrieval import (
+from scripts.multimodal.demo_multimodal_retrieval import (
     load_profiles,
 )
 
-from scripts.demo_multimodal_evidence import (
+from scripts.multimodal.demo_multimodal_evidence import (
     search_with_evidence,
 )
 
-from scripts.demo_grounded_multimodal_answers import (
+from scripts.multimodal.demo_grounded_multimodal_answers import (
     build_source_context,
     evaluate_candidate,
     render_answer,
 )
 
-from scripts.multimodal_claim_safety_gate import (
+from scripts.multimodal.multimodal_claim_safety_gate import (
     make_claim,
     validate_claim,
 )

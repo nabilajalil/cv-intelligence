@@ -18,7 +18,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from scripts.verify_scanned_cv_visual_evidence import (
+from scripts.multimodal.verify_scanned_cv_visual_evidence import (
     MODEL,
     PDF_PATH,
     render_page,

@@ -27,7 +27,7 @@ from pathlib import Path
 from scripts.document_fingerprints import (
     sha256_file,
 )
-from scripts.demo_multimodal_retrieval import (
+from scripts.multimodal.demo_multimodal_retrieval import (
     load_profiles,
 )
 from scripts.demo_protected_grounded_answers import (
@@ -35,7 +35,7 @@ from scripts.demo_protected_grounded_answers import (
     build_protected_context,
     run_query,
 )
-from scripts.multimodal_claim_safety_gate import (
+from scripts.multimodal.multimodal_claim_safety_gate import (
     load_json,
 )
 

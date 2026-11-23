@@ -26,7 +26,7 @@ from scripts.document_fingerprints import (
     sha256_file,
 )
 
-from scripts.multimodal_claim_safety_gate import (
+from scripts.multimodal.multimodal_claim_safety_gate import (
     PROFILE_PATH,
     load_json,
     make_claim,

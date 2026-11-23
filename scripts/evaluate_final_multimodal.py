@@ -16,10 +16,10 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scripts.demo_multimodal_retrieval import (
+from scripts.multimodal.demo_multimodal_retrieval import (
     load_profiles,
 )
-from scripts.demo_multimodal_evidence import (
+from scripts.multimodal.demo_multimodal_evidence import (
     search_with_evidence,
 )
 

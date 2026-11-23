@@ -26,7 +26,7 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-from scripts.demo_multimodal_retrieval import (
+from scripts.multimodal.demo_multimodal_retrieval import (
     load_profiles,
     profile_to_text,
     tokenize,
