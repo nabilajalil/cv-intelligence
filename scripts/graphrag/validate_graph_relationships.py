@@ -40,7 +40,7 @@ def load_extraction_results():
         raise FileNotFoundError(
             f"Missing extraction results: {INPUT_PATH}\n"
             "Run Lesson 5C first:\n"
-            "python -m scripts.demo_graph_entity_extraction"
+            "python -m scripts.graphrag.demo_graph_entity_extraction"
         )
 
     return json.loads(
