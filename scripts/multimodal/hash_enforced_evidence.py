@@ -11,7 +11,7 @@ Security rules:
 No OpenAI API calls.
 
 Run:
-    python -m scripts.hash_enforced_evidence
+    python -m scripts.multimodal.hash_enforced_evidence
 """
 
 import copy
@@ -20,7 +20,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scripts.document_fingerprints import (
+from scripts.utilities.document_fingerprints import (
     BOUND_EVIDENCE_OUTPUT,
     SCANNED_PDF,
     sha256_file,

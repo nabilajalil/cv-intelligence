@@ -11,7 +11,7 @@ of production-grade privacy or semantic correctness.
 import copy
 import unittest
 
-from scripts.validate_semantic_claims import (
+from scripts.utilities.validate_semantic_claims import (
     validate_claim,
 )
 
@@ -25,7 +25,7 @@ from scripts.graphrag.demo_privacy_safe_graph_answers import (
     make_safe_registry,
 )
 
-from scripts.privacy_safe_evidence import (
+from scripts.utilities.privacy_safe_evidence import (
     make_display_excerpt,
     EMAIL_PATTERN,
     PHONE_PATTERN,

@@ -228,8 +228,8 @@ A separate synthetic GraphRAG experiment reported **nDCG@5 of 0.890** for a BM25
 With the necessary local synthetic inputs and saved verification artifacts available:
 
 ```bash
-python -m scripts.evaluate_phase_6c
-python -m scripts.evaluate_phase_7
+python -m scripts.evaluation.evaluate_phase_6c
+python -m scripts.evaluation.evaluate_phase_7
 ```
 
 Run the focused regression suites:
@@ -280,7 +280,7 @@ A SHA-256 match establishes byte consistency with the stored fingerprint; it **d
 2. Switch to **Protected Multimodal Search** and run `Python Docker`.
 3. Open candidate `M001` and show the four accepted evidence items, PDF page provenance, and matching integrity status.
 4. Run `Kubernetes Terraform` to demonstrate that unsupported skills do not produce an eligible candidate.
-5. Run `python -m scripts.evaluate_phase_7` and show the **39 passing tests** and saved Markdown evaluation report.
+5. Run `python -m scripts.evaluation.evaluate_phase_7` and show the **39 passing tests** and saved Markdown evaluation report.
 6. Explain the distinction between **verified document mentions** and **independently validated qualifications**.
 
 ## Roadmap

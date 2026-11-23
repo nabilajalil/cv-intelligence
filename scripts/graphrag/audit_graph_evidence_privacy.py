@@ -1,13 +1,13 @@
 
 """Lesson 5G.1: Audit display excerpts for skill evidence."""
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     load_chunks,
     collect_candidate_chunks,
     find_skill_evidence,
 )
 
-from scripts.privacy_safe_evidence import (
+from scripts.utilities.privacy_safe_evidence import (
     make_display_excerpt,
     EMAIL_PATTERN,
     PHONE_PATTERN,

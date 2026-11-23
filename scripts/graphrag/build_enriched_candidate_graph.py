@@ -22,7 +22,7 @@ from pathlib import Path
 
 import networkx as nx
 
-from scripts.demo_parent_cv_verification import load_chunks
+from scripts.retrieval.demo_parent_cv_verification import load_chunks
 
 
 BASE_GRAPH_PATH = Path(

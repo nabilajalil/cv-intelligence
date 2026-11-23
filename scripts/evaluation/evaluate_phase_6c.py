@@ -15,7 +15,7 @@ Outputs:
 No OpenAI API calls.
 
 Run:
-    python -m scripts.evaluate_phase_6c
+    python -m scripts.evaluation.evaluate_phase_6c
 """
 
 import json
@@ -24,13 +24,13 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scripts.document_fingerprints import (
+from scripts.utilities.document_fingerprints import (
     sha256_file,
 )
 from scripts.multimodal.demo_multimodal_retrieval import (
     load_profiles,
 )
-from scripts.demo_protected_grounded_answers import (
+from scripts.multimodal.demo_protected_grounded_answers import (
     PROTECTED_REPORT_PATH,
     build_protected_context,
     run_query,
@@ -437,9 +437,9 @@ def make_markdown(results):
         "## Reproduction",
         "",
         "```bash",
-        "python -m scripts.demo_protected_grounded_answers",
+        "python -m scripts.multimodal.demo_protected_grounded_answers",
         "python -m unittest discover -s tests -p 'test_*grounded_answers.py' -v",
-        "python -m scripts.evaluate_phase_6c",
+        "python -m scripts.evaluation.evaluate_phase_6c",
         "```",
         "",
     ])

@@ -23,14 +23,14 @@ from scripts.multimodal.demo_grounded_multimodal_answers import (
     make_evidence_claim,
     render_answer,
 )
-from scripts.demo_protected_grounded_answers import (
+from scripts.multimodal.demo_protected_grounded_answers import (
     PROTECTED_REPORT_PATH,
     build_protected_context,
     evaluate_protected_candidate,
     prepare_protected_report,
     run_query,
 )
-from scripts.hash_enforced_evidence import (
+from scripts.multimodal.hash_enforced_evidence import (
     validate_hash_enforced_claim,
 )
 from scripts.multimodal.multimodal_claim_safety_gate import (

@@ -23,7 +23,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import END, START, StateGraph
 from rank_bm25 import BM25Okapi
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     collect_candidate_chunks,
     extract_required_skills,
     find_skill_evidence,

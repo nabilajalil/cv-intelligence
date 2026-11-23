@@ -9,7 +9,7 @@ Tests whether a vision model:
 Uses one paid OpenAI API request.
 
 Run:
-    python -m scripts.test_visual_verification_negative
+    python -m scripts.multimodal.test_visual_verification_negative
 """
 
 import json

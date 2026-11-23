@@ -26,7 +26,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, START, END
 from pydantic import BaseModel, Field
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     load_chunks,
     collect_candidate_chunks,
     find_skill_evidence,

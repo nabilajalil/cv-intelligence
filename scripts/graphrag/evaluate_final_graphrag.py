@@ -16,7 +16,7 @@ import csv
 import json
 from pathlib import Path
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     load_chunks,
     collect_candidate_chunks,
 )

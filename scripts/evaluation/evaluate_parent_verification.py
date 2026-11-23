@@ -32,7 +32,7 @@ from scripts.agentic_rag.demo_hybrid_agentic_rag import (
     tokenize,
 )
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     collect_candidate_chunks,
     extract_required_skills,
     find_skill_evidence,

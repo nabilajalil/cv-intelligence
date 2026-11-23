@@ -12,10 +12,10 @@ The live mode:
 - Saves only a successful, integrity-checked result.
 
 Run free dry-run:
-    python -m scripts.protected_real_vision
+    python -m scripts.multimodal.protected_real_vision
 
 Live API execution (later):
-    python -m scripts.protected_real_vision --live
+    python -m scripts.multimodal.protected_real_vision --live
 """
 
 import argparse

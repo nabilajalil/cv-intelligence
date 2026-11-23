@@ -27,7 +27,7 @@ from langgraph.graph import StateGraph, START, END
 
 load_dotenv()
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     load_chunks,
     collect_candidate_chunks,
     find_skill_evidence,

@@ -31,7 +31,7 @@ from scripts.graphrag.demo_validated_graph_answers import (
     normalize_retrieval_query,
 )
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     load_chunks,
     collect_candidate_chunks,
 )
@@ -45,7 +45,7 @@ from scripts.graphrag.evaluate_graph_hybrid_retrieval import (
     load_graph,
 )
 
-from scripts.privacy_safe_evidence import (
+from scripts.utilities.privacy_safe_evidence import (
     make_display_excerpt,
     EMAIL_PATTERN,
     PHONE_PATTERN,

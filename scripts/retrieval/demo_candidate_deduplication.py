@@ -15,9 +15,9 @@ experimental corpus.
 No API calls.
 
 Run:
-    python -m scripts.demo_candidate_deduplication
+    python -m scripts.retrieval.demo_candidate_deduplication
 
-    python -m scripts.demo_candidate_deduplication \
+    python -m scripts.retrieval.demo_candidate_deduplication \
         --query "Recruitment Analytics Dashboard"
 """
 

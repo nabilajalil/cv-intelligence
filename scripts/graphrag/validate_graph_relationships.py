@@ -19,7 +19,7 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-from scripts.demo_parent_cv_verification import load_chunks
+from scripts.retrieval.demo_parent_cv_verification import load_chunks
 
 
 INPUT_PATH = Path(

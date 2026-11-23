@@ -20,7 +20,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import END, StateGraph
 from rank_bm25 import BM25Okapi
 
-from scripts.demo_jina_late_chunking import embed
+from scripts.retrieval.demo_jina_late_chunking import embed
 
 
 DATA_DIR = Path("data/public_benchmark")

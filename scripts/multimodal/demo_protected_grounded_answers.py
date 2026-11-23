@@ -12,7 +12,7 @@ Includes safe modified/missing PDF tests.
 No OpenAI API calls.
 
 Run:
-    python -m scripts.demo_protected_grounded_answers
+    python -m scripts.multimodal.demo_protected_grounded_answers
 """
 
 import copy
@@ -35,7 +35,7 @@ from scripts.multimodal.demo_grounded_multimodal_answers import (
     normalize,
     render_answer,
 )
-from scripts.hash_enforced_evidence import (
+from scripts.multimodal.hash_enforced_evidence import (
     validate_hash_enforced_claim,
 )
 from scripts.multimodal.multimodal_claim_safety_gate import (

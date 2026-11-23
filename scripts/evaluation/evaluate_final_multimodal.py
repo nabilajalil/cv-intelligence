@@ -7,7 +7,7 @@ the grounded-answer regression tests.
 No OpenAI API calls.
 
 Run:
-    python -m scripts.evaluate_final_multimodal
+    python -m scripts.evaluation.evaluate_final_multimodal
 """
 
 import json

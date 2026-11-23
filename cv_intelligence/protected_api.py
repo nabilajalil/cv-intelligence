@@ -16,7 +16,7 @@ from scripts.multimodal.demo_multimodal_retrieval import (
 from scripts.multimodal.demo_multimodal_evidence import (
     search_with_evidence,
 )
-from scripts.demo_protected_grounded_answers import (
+from scripts.multimodal.demo_protected_grounded_answers import (
     build_protected_context,
     evaluate_protected_candidate,
 )

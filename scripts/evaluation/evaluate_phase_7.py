@@ -20,8 +20,8 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from cv_intelligence.api import app
-from scripts.document_fingerprints import sha256_file
-from scripts.demo_protected_grounded_answers import (
+from scripts.utilities.document_fingerprints import sha256_file
+from scripts.multimodal.demo_protected_grounded_answers import (
     PROTECTED_REPORT_PATH,
 )
 from scripts.multimodal.multimodal_claim_safety_gate import load_json
@@ -395,7 +395,7 @@ def make_markdown(results):
             "## Reproduce",
             "",
             "```bash",
-            "python -m scripts.evaluate_phase_7",
+            "python -m scripts.evaluation.evaluate_phase_7",
             "```",
             "",
         ]

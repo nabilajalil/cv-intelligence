@@ -21,7 +21,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from scripts.demo_parent_cv_verification import (
+from scripts.retrieval.demo_parent_cv_verification import (
     load_chunks,
     collect_candidate_chunks,
 )
@@ -49,7 +49,7 @@ from scripts.graphrag.demo_privacy_safe_graph_answers import (
     make_safe_registry,
 )
 
-from scripts.validate_semantic_claims import (
+from scripts.utilities.validate_semantic_claims import (
     validate_claim,
 )
 

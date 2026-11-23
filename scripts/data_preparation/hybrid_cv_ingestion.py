@@ -8,10 +8,10 @@ Automatically routes a PDF to:
 Both routes produce the same CVProfile schema.
 
 Usage:
-    python -m scripts.hybrid_cv_ingestion \
+    python -m scripts.data_preparation.hybrid_cv_ingestion \
         data/multimodal/input/synthetic_text_cv.pdf
 
-    python -m scripts.hybrid_cv_ingestion \
+    python -m scripts.data_preparation.hybrid_cv_ingestion \
         data/multimodal/input/synthetic_scanned_cv.pdf
 
 Each run makes one paid OpenAI API request.

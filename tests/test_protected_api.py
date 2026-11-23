@@ -10,7 +10,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from cv_intelligence.api import app
-from scripts.demo_protected_grounded_answers import (
+from scripts.multimodal.demo_protected_grounded_answers import (
     PROTECTED_REPORT_PATH,
 )
 
@@ -155,7 +155,7 @@ class TestProtectedAPI(unittest.TestCase):
             # Replace the trusted PDF path inside the
             # hash-enforcement module, not the request.
             with patch(
-                "scripts.demo_protected_grounded_answers."
+                "scripts.multimodal.demo_protected_grounded_answers."
                 "validate_hash_enforced_claim",
                 wraps=self._modified_pdf_validator(
                     altered_pdf
@@ -177,7 +177,7 @@ class TestProtectedAPI(unittest.TestCase):
             missing_pdf = Path(tmp) / "missing.pdf"
 
             with patch(
-                "scripts.demo_protected_grounded_answers."
+                "scripts.multimodal.demo_protected_grounded_answers."
                 "validate_hash_enforced_claim",
                 wraps=self._modified_pdf_validator(
                     missing_pdf
@@ -205,7 +205,7 @@ class TestProtectedAPI(unittest.TestCase):
 
     @staticmethod
     def _modified_pdf_validator(pdf_path):
-        from scripts.hash_enforced_evidence import (
+        from scripts.multimodal.hash_enforced_evidence import (
             validate_hash_enforced_claim,
         )
 

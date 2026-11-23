@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 from dotenv import load_dotenv
 
-from scripts.demo_jina_late_chunking import embed
+from scripts.retrieval.demo_jina_late_chunking import embed
 from scripts.evaluation.evaluate_public_bm25 import ndcg_at_k
 
 
