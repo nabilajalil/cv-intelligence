@@ -27,7 +27,7 @@ from scripts.graphrag.demo_deterministic_graph_answers import (
     validate_explanations,
 )
 
-from scripts.demo_validated_graph_answers import (
+from scripts.graphrag.demo_validated_graph_answers import (
     normalize_retrieval_query,
 )
 

@@ -41,7 +41,7 @@ from scripts.evaluate_graph_hybrid_retrieval import (
     load_graph,
 )
 
-from scripts.demo_validated_graph_answers import (
+from scripts.graphrag.demo_validated_graph_answers import (
     normalize_retrieval_query,
     extract_skill_quote,
 )
