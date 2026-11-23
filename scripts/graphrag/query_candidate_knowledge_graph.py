@@ -37,7 +37,7 @@ def load_graph():
         raise FileNotFoundError(
             f"Graph not found: {GRAPH_PATH}\n"
             "Run Lesson 5A first:\n"
-            "python -m scripts.build_candidate_knowledge_graph"
+            "python -m scripts.graphrag.build_candidate_knowledge_graph"
         )
 
     data = json.loads(
