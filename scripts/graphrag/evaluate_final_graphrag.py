@@ -21,7 +21,7 @@ from scripts.demo_parent_cv_verification import (
     collect_candidate_chunks,
 )
 
-from scripts.evaluate_graph_hybrid_retrieval import (
+from scripts.graphrag.evaluate_graph_hybrid_retrieval import (
     build_bm25,
     rank_candidates_bm25,
     extract_skills,
