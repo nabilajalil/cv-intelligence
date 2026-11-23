@@ -62,25 +62,21 @@ cv-intelligence/
 │   ├── api.py                    # Main FastAPI application
 │   ├── protected_api.py          # Protected multimodal endpoint
 │   ├── dashboard.py              # Streamlit interface
-│   └── ...                       # Agent, retrieval, configuration modules
+│   └── ...                       # Application modules
 ├── scripts/
-│   ├── demo_protected_grounded_answers.py
-│   ├── protected_real_vision.py
-│   ├── hash_enforced_evidence.py
-│   ├── evaluate_phase_6c.py
-│   ├── evaluate_phase_7.py
-│   └── ...                       # Ingestion, graph and benchmark scripts
-├── tests/
-│   ├── test_protected_api.py
-│   ├── test_protected_grounded_answers.py
-│   ├── test_multimodal_grounded_answers.py
-│   └── ...
-├── data/                          # Local datasets and generated artifacts
+│   ├── agentic_rag/              # Agentic RAG workflows
+│   ├── data_preparation/         # Ingestion and data preparation
+│   ├── evaluation/               # Benchmarks and evaluation
+│   ├── graphrag/                 # Knowledge graphs and GraphRAG
+│   ├── multimodal/               # Multimodal evidence and verification
+│   ├── retrieval/                # Search and retrieval experiments
+│   └── utilities/                # Supporting utilities
+├── tests/                        # Automated tests
+├── data/                         # Local datasets and generated artifacts
 ├── pyproject.toml
 ├── Dockerfile
 ├── compose.yaml
 └── README.md
-```
 
 Some data and generated verification reports are local artifacts and may not be included in a public clone. Check the prerequisites below before running the protected demo.
 
