@@ -20,7 +20,7 @@ import numpy as np
 from dotenv import load_dotenv
 from rank_bm25 import BM25Okapi
 
-from scripts.demo_hybrid_agentic_rag import (
+from scripts.agentic_rag.demo_hybrid_agentic_rag import (
     RETRIEVAL_POOL,
     RRF_K,
     candidate_ranking,
