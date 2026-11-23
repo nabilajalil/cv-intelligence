@@ -12,7 +12,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_classic.retrievers import ParentDocumentRetriever
 
-from scripts.search_public_cvs import load_public_cvs
+from scripts.retrieval.search_public_cvs import load_public_cvs
 
 
 def build_retriever():

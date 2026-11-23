@@ -4,7 +4,7 @@ import json
 import math
 from pathlib import Path
 
-from scripts.search_public_cvs import (
+from scripts.retrieval.search_public_cvs import (
     load_public_cvs,
     search_public_cvs,
 )

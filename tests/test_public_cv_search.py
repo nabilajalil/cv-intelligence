@@ -4,7 +4,7 @@ import json
 from cv_intelligence.advanced_rag.rag_baseline import (
     retrieve_cv_documents,
 )
-from scripts.search_public_cvs import load_public_cvs
+from scripts.retrieval.search_public_cvs import load_public_cvs
 
 
 def test_load_public_cvs(tmp_path):

@@ -6,7 +6,7 @@ from pathlib import Path
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from scripts.search_public_cvs import load_public_cvs
+from scripts.retrieval.search_public_cvs import load_public_cvs
 
 
 OUTPUT_PATH = Path(
