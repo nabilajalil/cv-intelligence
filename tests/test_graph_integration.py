@@ -16,15 +16,15 @@ import re
 import unittest
 from pathlib import Path
 
-from scripts.validate_semantic_claims import (
+from scripts.utilities.validate_semantic_claims import (
     validate_claim,
 )
 
-from scripts.demo_claim_validated_graph_answers import (
+from scripts.graphrag.demo_claim_validated_graph_answers import (
     render_answer,
 )
 
-from scripts.privacy_safe_evidence import (
+from scripts.utilities.privacy_safe_evidence import (
     EMAIL_PATTERN,
     PHONE_PATTERN,
     DOB_PATTERN,

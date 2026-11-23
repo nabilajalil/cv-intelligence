@@ -10,17 +10,17 @@ No OpenAI API calls.
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
-from scripts.demo_multimodal_retrieval import (
+from scripts.multimodal.demo_multimodal_retrieval import (
     load_profiles,
 )
-from scripts.demo_multimodal_evidence import (
+from scripts.multimodal.demo_multimodal_evidence import (
     search_with_evidence,
 )
-from scripts.demo_protected_grounded_answers import (
+from scripts.multimodal.demo_protected_grounded_answers import (
     build_protected_context,
     evaluate_protected_candidate,
 )
-from scripts.demo_grounded_multimodal_answers import (
+from scripts.multimodal.demo_grounded_multimodal_answers import (
     render_answer,
 )
 

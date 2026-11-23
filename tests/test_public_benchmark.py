@@ -1,5 +1,5 @@
 
-from scripts.build_public_benchmark import (
+from scripts.data_preparation.build_public_benchmark import (
     extract_skills,
     relevance_grade,
 )
