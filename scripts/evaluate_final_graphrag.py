@@ -36,7 +36,7 @@ from scripts.evaluate_hybrid_rrf import (
     evaluate_ranking,
 )
 
-from scripts.demo_deterministic_graph_answers import (
+from scripts.graphrag.demo_deterministic_graph_answers import (
     collect_evidence_registry,
     compute_skill_coverage,
 )

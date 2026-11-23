@@ -35,7 +35,7 @@ from scripts.evaluate_graph_hybrid_retrieval import (
     load_graph,
 )
 
-from scripts.demo_deterministic_graph_answers import (
+from scripts.graphrag.demo_deterministic_graph_answers import (
     collect_evidence_registry,
     compute_skill_coverage,
     stable_query_id,

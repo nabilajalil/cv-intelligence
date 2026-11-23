@@ -19,7 +19,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-from scripts.demo_deterministic_graph_answers import (
+from scripts.graphrag.demo_deterministic_graph_answers import (
     ExplanationBatch,
     collect_evidence_registry,
     compute_skill_coverage,
