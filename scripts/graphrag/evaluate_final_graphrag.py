@@ -30,7 +30,7 @@ from scripts.graphrag.evaluate_graph_hybrid_retrieval import (
     load_graph,
 )
 
-from scripts.evaluate_hybrid_rrf import (
+from scripts.evaluation.evaluate_hybrid_rrf import (
     load_queries,
     load_qrels,
     evaluate_ranking,

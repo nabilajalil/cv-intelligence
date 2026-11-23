@@ -5,7 +5,7 @@ from pathlib import Path
 
 from rank_bm25 import BM25Okapi
 
-from scripts.evaluate_public_bm25 import (
+from scripts.evaluation.evaluate_public_bm25 import (
     DATA_DIR,
     TOP_K,
     load_queries,

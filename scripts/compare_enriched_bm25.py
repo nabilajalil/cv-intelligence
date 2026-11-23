@@ -4,8 +4,8 @@
 import json
 from pathlib import Path
 
-from scripts.evaluate_chunk_bm25 import retrieve_candidates
-from scripts.evaluate_public_bm25 import ndcg_at_k
+from scripts.evaluation.evaluate_chunk_bm25 import retrieve_candidates
+from scripts.evaluation.evaluate_public_bm25 import ndcg_at_k
 
 
 DATA_DIR = Path("data/public_benchmark")

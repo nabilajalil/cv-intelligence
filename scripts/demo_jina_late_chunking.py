@@ -7,7 +7,7 @@ import numpy as np
 import requests
 from dotenv import load_dotenv
 
-from scripts.evaluate_chunk_bm25 import load_chunks
+from scripts.evaluation.evaluate_chunk_bm25 import load_chunks
 
 
 API_URL = "https://api.jina.ai/v1/embeddings"

@@ -1,11 +1,11 @@
 
 from pathlib import Path
 
-from scripts.evaluate_chunk_bm25 import (
+from scripts.evaluation.evaluate_chunk_bm25 import (
     load_chunks,
     retrieve_candidates,
 )
-from scripts.evaluate_public_bm25 import (
+from scripts.evaluation.evaluate_public_bm25 import (
     load_queries,
     load_qrels,
     ndcg_at_k,

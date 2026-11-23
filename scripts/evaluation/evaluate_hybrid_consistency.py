@@ -6,7 +6,7 @@ Compares text-route and vision-route CV profiles.
 No OpenAI API calls.
 
 Run:
-    python -m scripts.evaluate_hybrid_consistency
+    python -m scripts.evaluation.evaluate_hybrid_consistency
 """
 
 import json

@@ -115,7 +115,7 @@ def load_late_vectors(chunks):
             raise FileNotFoundError(
                 f"Missing cached vectors: {path}\n"
                 "Run Stage 3E first:\n"
-                "python -m scripts.evaluate_jina_late_chunking"
+                "python -m scripts.evaluation.evaluate_jina_late_chunking"
             )
 
         with np.load(path, allow_pickle=False) as saved:

@@ -27,7 +27,7 @@ from scripts.demo_parent_cv_verification import (
     find_skill_evidence,
 )
 
-from scripts.evaluate_hybrid_rrf import (
+from scripts.evaluation.evaluate_hybrid_rrf import (
     load_queries,
     load_qrels,
     evaluate_ranking,

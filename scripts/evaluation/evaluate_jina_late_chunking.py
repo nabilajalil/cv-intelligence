@@ -10,7 +10,7 @@ import numpy as np
 from dotenv import load_dotenv
 
 from scripts.demo_jina_late_chunking import embed
-from scripts.evaluate_public_bm25 import ndcg_at_k
+from scripts.evaluation.evaluate_public_bm25 import ndcg_at_k
 
 
 DATA_DIR = Path("data/public_benchmark")

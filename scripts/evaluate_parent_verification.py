@@ -39,9 +39,9 @@ from scripts.demo_parent_cv_verification import (
     classify_match,
 )
 
-from scripts.evaluate_weighted_rrf import weighted_rrf
+from scripts.evaluation.evaluate_weighted_rrf import weighted_rrf
 
-from scripts.evaluate_hybrid_rrf import (
+from scripts.evaluation.evaluate_hybrid_rrf import (
     evaluate_ranking,
     load_qrels,
     load_queries,

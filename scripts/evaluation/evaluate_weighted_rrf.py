@@ -31,7 +31,7 @@ from scripts.agentic_rag.demo_hybrid_agentic_rag import (
     tokenize,
 )
 
-from scripts.evaluate_hybrid_rrf import (
+from scripts.evaluation.evaluate_hybrid_rrf import (
     evaluate_ranking,
     load_qrels,
     load_queries,

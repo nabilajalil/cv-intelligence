@@ -6,7 +6,7 @@ from pathlib import Path
 from openai import OpenAI
 
 from cv_intelligence.config import Settings
-from scripts.evaluate_chunk_bm25 import load_chunks
+from scripts.evaluation.evaluate_chunk_bm25 import load_chunks
 from scripts.retrieval.search_public_cvs import load_public_cvs
 
 
