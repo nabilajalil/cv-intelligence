@@ -6,6 +6,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .response_parser import PromptResponseError
+from .injection_guard import reject_instruction_like_evidence
 
 
 def _explicit_skill_mention(skill: str, text: str) -> bool:
@@ -33,16 +34,23 @@ def validate_skill_support(
 ) -> list[dict[str, Any]]:
     """Reject claims without an explicit cited skill mention."""
 
+    # Step 1: Detect suspicious instructions inside CV evidence.
+    reject_instruction_like_evidence(evidence=evidence)
+
+    # Step 2: Build the evidence lookup.
     evidence_by_id = {}
 
     for item in evidence:
         evidence_id = item["evidence_id"]
 
         if evidence_id in evidence_by_id:
-            raise PromptResponseError("Duplicate evidence ID")
+            raise PromptResponseError(
+                "Duplicate evidence ID"
+            )
 
         evidence_by_id[evidence_id] = item
 
+    # Step 3: Validate each proposed skill claim.
     validated = []
 
     for claim in claims:
@@ -55,14 +63,19 @@ def validate_skill_support(
             item = evidence_by_id.get(evidence_id)
 
             if item is None:
-                raise PromptResponseError("Unknown evidence ID")
+                raise PromptResponseError(
+                    "Unknown evidence ID"
+                )
 
             if item["candidate_id"] != candidate_id:
                 raise PromptResponseError(
                     "Evidence ownership mismatch"
                 )
 
-            if _explicit_skill_mention(skill, item["text"]):
+            if _explicit_skill_mention(
+                skill,
+                item["text"],
+            ):
                 supported = True
 
         if not supported:
