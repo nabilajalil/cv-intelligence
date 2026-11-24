@@ -225,6 +225,7 @@ The four-case synthetic benchmark showed that Qwen proposed unsupported Kubernet
 
 ```bash
 python -m scripts.llm.demo_secure_qwen
+```
 ## Evaluation results
 
 The following results were observed in the **local, synthetic demonstration**, not on an external recruitment benchmark.
