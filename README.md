@@ -197,6 +197,34 @@ curl -X POST http://127.0.0.1:8001/multimodal/protected-search \
 
 The protected endpoint returns eligible candidates and accepted evidence; it does not expose arbitrary PDF-path selection to the caller. The demo's API response includes an evidence count for withheld items rather than exposing their unsupported text.
 
+
+## Prompt Engineering and LLM Validation
+
+### Features
+
+- Local Qwen 2.5 3B Instruct model through Ollama.
+- Evidence-grounded candidate skill extraction.
+- Structured JSON response validation.
+- Candidate ownership and skill-support verification.
+- PDF integrity checks in the protected workflow.
+- Detection of known prompt-injection patterns.
+- Verified skill locations with CV sections and page numbers.
+
+### Prompt Evaluation Results
+
+| Scenario | Result |
+|---|---|
+| Python skill extraction | Passed |
+| Python and Docker extraction | Passed |
+| Unsupported Kubernetes claim | Rejected by validator |
+| Kubernetes prompt injection | Rejected by validator |
+
+The four-case synthetic benchmark showed that Qwen proposed unsupported Kubernetes claims in two cases, but the validation layer rejected both.
+
+### Run the Local Qwen Demo
+
+```bash
+python -m scripts.llm.demo_secure_qwen
 ## Evaluation results
 
 The following results were observed in the **local, synthetic demonstration**, not on an external recruitment benchmark.
