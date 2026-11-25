@@ -1,325 +1,224 @@
 # CV Intelligence
 
-**Evidence-grounded CV search and analysis with Agentic RAG, GraphRAG, and protected multimodal retrieval.**
+**Evidence-grounded candidate search and analysis using Agentic RAG, hybrid retrieval, and multimodal AI.**
 
-CV Intelligence is a Python portfolio project that explores how recruiters can search candidate CVs while retaining traceable evidence for each result. It combines document ingestion, semantic and lexical retrieval, agent-based evaluation, candidate knowledge graphs, and scanned-document verification in a FastAPI backend and Streamlit interface.
+CV Intelligence is a Python-based AI engineering portfolio project exploring natural-language CV search, candidate evaluation, retrieval optimization, and reliable LLM response generation. It identifies explicitly documented skills and returns supporting evidence from source documents.
 
-> **Project status:** Research/portfolio prototype evaluated primarily on synthetic CVs. A skill mention in a CV is **not** proof of proficiency, employment history, or suitability for a role. This system is not intended to make autonomous hiring decisions.
+## Key Capabilities
 
-## Highlights
+| Capability | Implementation | Status |
+|---|---|---|
+| Document ingestion | PDF/DOCX extraction, section-aware chunking and candidate metadata | Implemented |
+| Hybrid RAG | OpenAI embeddings, Chroma, BM25 and Reciprocal Rank Fusion (RRF) | Implemented |
+| Candidate evaluation | Skill matching, candidate ranking and supporting evidence | Implemented |
+| Agentic orchestration | Controlled sequential LangGraph workflow | Implemented |
+| Response generation | LangChain, Ollama and Qwen2.5 3B/7B | Implemented; generative mode experimental |
+| Inference controls | Structured outputs, estimated token budgets, temperature, HTTP timeouts and fallback | Implemented |
+| Retrieval optimization | Baseline BM25, contextual retrieval and late chunking comparisons | Experimental |
+| Long-context vs. RAG | Context and computational cost comparison | Experimental |
+| GraphRAG | Candidate knowledge graph and graph-enhanced retrieval | Experimental |
+| Multimodal retrieval | Text/vision processing and protected scanned-PDF search | Implemented prototype |
+| Evidence security | Claim validation, source binding, SHA-256 integrity and abstention | Implemented in protected workflows |
+| Privacy and security | Access control, data retention policies and sensitive information protection | Implemented |
+| Prompt engineering | Versioned prompts, structured claims and known-pattern injection detection | Experimental |
+| Public dataset benchmarking | Hugging Face dataset and automated retrieval evaluation | Implemented |
+| Observability | LangSmith tracing, latency, token monitoring and fallback diagnostics | Implemented; partial instrumentation |
+| Application | FastAPI, Streamlit and Docker configuration | Implemented |
+| Automated testing | 164 passing tests | Implemented |
 
-- **Document ingestion:** PDF and DOCX CV processing, chunking, and structured candidate profiles.
-- **Retrieval-augmented search:** OpenAI embeddings with Chroma, lexical BM25 retrieval, and retrieval experiments including contextual enrichment and late chunking.
-- **Agentic RAG:** LangGraph-based candidate retrieval, evidence checks, and grounded summaries.
-- **GraphRAG:** A candidate knowledge graph connecting candidates, skills, experience, projects, and supporting chunks.
-- **Multimodal CV processing:** A hybrid text/vision pipeline for text-based and scanned PDFs.
-- **Evidence safety:** Candidate/source binding, claim-level verification, source-page provenance, SHA-256 document integrity checks, and abstention when evidence is missing or uncertain.
-- **Application:** FastAPI endpoints and a Streamlit dashboard with separate Agentic RAG and Protected Multimodal Search experiences.
-- **Evaluation:** Synthetic benchmark experiments, negative claim tests, and repeatable automated regression suites.
+## Technology Stack
 
-## Architecture
-
-```mermaid
-flowchart TD
-    A[Recruiter / Streamlit dashboard] --> B[FastAPI]
-    B --> C[Agentic RAG search]
-    B --> D[Protected multimodal search]
-    C --> E[Hybrid retrieval: embeddings + BM25]
-    E --> F[Chroma / indexed CV chunks]
-    C --> G[Candidate knowledge graph]
-    D --> H[Text and scanned PDF profiles]
-    H --> I[Verified visual evidence report]
-    I --> J[SHA-256 integrity and claim safety gate]
-    G --> K[Evidence-grounded results]
-    F --> K
-    J --> K
-    K --> A
-```
-
-The protected search path checks the saved verification record against the current source PDF before accepting evidence. Verification reports are generated in an earlier, explicit processing step; **normal protected-search requests do not call a vision model**.
-
-## Technology stack
-
-| Layer | Technologies |
+| Component | Technologies |
 |---|---|
 | Language | Python 3.12 |
-| API | FastAPI, Pydantic, Uvicorn |
-| UI | Streamlit, Requests |
-| Agent workflow | LangGraph |
-| Embeddings / model experiments | OpenAI API (`text-embedding-3-small`, `gpt-4.1-mini`) |
-| Vector retrieval | Chroma |
-| Lexical and graph retrieval | BM25 and project-specific graph processing |
-| PDF processing | PyMuPDF and text/vision extraction |
-| Testing | Python `unittest`, FastAPI `TestClient` |
+| LLM framework and orchestration | LangChain, LangGraph |
+| Models | Qwen2.5 3B/7B, OpenAI GPT-4.1 mini |
+| Embeddings | OpenAI text-embedding-3-small |
+| Local inference | Ollama |
+| Retrieval | Chroma, BM25, RRF |
+| Document processing | PyMuPDF, PDF/DOCX processing |
+| Data validation | Pydantic |
+| Backend | FastAPI, Uvicorn |
+| Frontend | Streamlit |
+| Observability | LangSmith |
+| Testing | Pytest, unittest |
+| Containerization | Docker |
 
-See [`pyproject.toml`](pyproject.toml) for the authoritative dependency list and version constraints.
+## Agentic RAG Workflow
 
-## Repository guide
+1. **Understand:** Extract explicit skill requirements from the recruiter query.
+2. **Retrieve:** Retrieve relevant CV chunks using hybrid lexical and semantic search.
+3. **Evaluate:** Match documented skills, rank candidates and collect supporting evidence.
+4. **Respond:** Produce a recruiter summary from structured candidate evidence.
 
-```text
-cv-intelligence/
-├── cv_intelligence/
-│   ├── api.py                    # Main FastAPI application
-│   ├── protected_api.py          # Protected multimodal endpoint
-│   ├── dashboard.py              # Streamlit interface
-│   └── ...                       # Application modules
-├── scripts/
-│   ├── agentic_rag/              # Agentic RAG workflows
-│   ├── data_preparation/         # Ingestion and data preparation
-│   ├── evaluation/               # Benchmarks and evaluation
-│   ├── graphrag/                 # Knowledge graphs and GraphRAG
-│   ├── multimodal/               # Multimodal evidence and verification
-│   ├── retrieval/                # Search and retrieval experiments
-│   └── utilities/                # Supporting utilities
-├── tests/                        # Automated tests
-├── data/                         # Local datasets and generated artifacts
-├── pyproject.toml
-├── Dockerfile
-├── compose.yaml
-└── README.md
+The main application uses a fixed LangGraph workflow. Skill extraction, ranking and evidence selection are controlled by application logic rather than an LLM. LLM inference is optional and limited to response generation in this workflow.
 
-Some data and generated verification reports are local artifacts and may not be included in a public clone. Check the prerequisites below before running the protected demo.
+## Retrieval Research and Experiments
 
-## Getting started
+| Strategy | Objective |
+|---|---|
+| Baseline BM25 | Establish a lexical retrieval baseline |
+| Dense retrieval | Capture semantic similarity beyond exact keywords |
+| Hybrid retrieval | Combine lexical precision and semantic relevance |
+| Contextual retrieval | Reduce context loss in independently retrieved chunks |
+| Late chunking | Explore preservation of document-level context |
+| Long-context vs. RAG | Compare context utilization and estimated inference costs |
+| GraphRAG | Explore relationships between candidates, skills, projects and experience |
 
-### Prerequisites
+Hybrid retrieval is used in the main application. Advanced retrieval strategies are maintained as separate experiments to investigate relevance, contextual preservation and computational trade-offs.
 
-- Python **3.12** (the development environment used for this project)
-- Git
-- An OpenAI API key **only for workflows that call OpenAI**, such as new embedding generation or live visual verification
-- A local copy of the required synthetic CV data and generated artifacts for the corresponding demo
+## Datasets
 
-### 1. Clone and install
+The public [Resume Parsing Vision](https://huggingface.co/datasets/sukhrobnurali/resume-parsing-vision) dataset from Hugging Face provides synthetic resumes and structured ground-truth annotations for retrieval benchmarking. The download pipeline requests 50 training samples by default, with a configurable limit and validation of records.
+
+Additional synthetic CVs support candidate evaluation, GraphRAG, multimodal verification, prompt injection testing and LLM response evaluation.
+
+## LLM Response Generation
+
+| Mode | Description |
+|---|---|
+| Deterministic (default) | Python-generated summaries without LLM inference |
+| Constrained | Qwen2.5 3B selects a response style; Python renders candidate facts |
+| Generative (experimental) | Qwen2.5 7B generates recruiter summaries from structured candidate evidence |
+
+Inference controls include structured output validation, estimated token budgets, temperature settings, HTTP timeouts, prompt versioning and deterministic fallback. Generated prose in experimental mode is not fully semantically validated.
+
+## Multimodal Retrieval and Evidence Security
+
+The protected scanned-CV workflow combines text extraction and visual verification, with candidate and source binding, claim-level validation, source-page provenance, SHA-256 document integrity checks and abstention when evidence is unavailable or invalid. Protected search uses previously prepared verification artifacts.
+
+A separate prompt engineering experiment investigates unsupported skill claims and known-pattern prompt injection detection.
+
+## Observability
+
+- LangSmith tracing for controlled synthetic evaluations.
+- Response generation latency and estimated token-budget monitoring.
+- Actual token usage where supported, prompt versioning and fallback diagnostics.
+- Streamlit inference diagnostics and API cost estimation.
+
+## Evaluation and Testing
+
+| Evaluation | Result |
+|---|---|
+| Automated test suite | 164 passed |
+| GraphRAG — BM25 + graph | nDCG@5: 0.890 |
+| Protected visual evidence verification | 6/6 supported |
+| Protected multimodal search | 3/3 query scenarios passed |
+| Document integrity scenarios | 2/2 passed |
+| Grounded-answer regression | 27/27 passed |
+| HTTP and grounded-answer tests | 39/39 passed |
+| Constrained LLM response evaluation | 4/4 passed |
+
+These results reflect controlled experimental conditions, not production-scale performance or generalization to real recruitment datasets.
+
+## Installation
+
+Requires Python 3.12, Git, an OpenAI API key for OpenAI-dependent workflows, and Ollama for optional local LLM inference.
 
 ```bash
-git clone <YOUR-REPOSITORY-URL>
+git clone https://github.com/nabilajalil/cv-intelligence.git
 cd cv-intelligence
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -e .
-```
-
-On Windows, use the appropriate virtual-environment activation command for your shell. The project was developed on Ubuntu 24.04 under WSL2.
-
-### 2. Configure environment variables
-
-Use the existing example configuration as your starting point:
-
-```bash
+python -m pip install -e ".[agent]"
 cp .env.example .env
 ```
 
-Edit `.env` and supply only the values required by the workflow you plan to run. Consult `cv_intelligence/config.py` for the configuration schema. **Never commit `.env`, API keys, credentials, or real candidate data.**
+Configure the required environment variables in `.env`. Do not commit API keys or sensitive CV data.
 
-For workflows requiring OpenAI, configure the appropriate OpenAI API key using the project's environment configuration.
+For optional local response generation:
 
-### 3. Start FastAPI
+```bash
+ollama pull qwen2.5:3b-instruct
+ollama pull qwen2.5:7b
+```
+
+## Running the Application
+
+Start the FastAPI backend:
 
 ```bash
 python -m uvicorn cv_intelligence.api:app --host 127.0.0.1 --port 8001
 ```
 
-- API documentation: <http://127.0.0.1:8001/docs>
-- Health check: <http://127.0.0.1:8001/health>
-
-The local Streamlit dashboard defaults to port **8001** for the API. Docker configuration may expose the API on port **8000** instead; adjust the dashboard's base URL accordingly.
-
-### 4. Start Streamlit
-
-In a **second terminal**:
+In a separate terminal, start Streamlit:
 
 ```bash
 source .venv/bin/activate
-python -m streamlit run cv_intelligence/dashboard.py
+CV_INTELLIGENCE_API_URL=http://127.0.0.1:8001 python -m streamlit run cv_intelligence/dashboard.py
 ```
 
-Open the local URL printed by Streamlit (commonly `http://localhost:8501`; the port can differ if already in use).
+- API documentation: http://127.0.0.1:8001/docs
+- Streamlit dashboard: use the local URL printed by Streamlit.
 
-To override the API base URL:
+To enable optional LLM generation, stop the backend and restart it with:
 
 ```bash
-CV_INTELLIGENCE_API_URL=http://127.0.0.1:8000 \
-  python -m streamlit run cv_intelligence/dashboard.py
+LANGSMITH_TRACING=false \
+CV_ENABLE_LLM_POLISHING=true \
+CV_RESPONSE_MODE=generative \
+python -m uvicorn cv_intelligence.api:app --host 127.0.0.1 --port 8001
 ```
 
-## Using the application
+Use `CV_RESPONSE_MODE=constrained` for constrained response generation.
 
-### Agentic RAG Search
+### Prepare the Public Benchmark
 
-The **Agentic RAG Search** tab searches the indexed CV collection and presents candidate summaries, skill mentions, and supporting text excerpts. This workflow may depend on local indexes, saved profiles, and configured model services.
+```bash
+python -m scripts.data_preparation.download_public_cvs --limit 50
+python -m scripts.data_preparation.inspect_public_cvs
+python -m scripts.data_preparation.chunk_public_cvs
+python -m scripts.data_preparation.build_public_benchmark
+```
 
-### Protected Multimodal Search
+### Run Tests
 
-The **Protected Multimodal Search** tab uses the saved synthetic scanned-CV profile and protected visual-verification report. For the controlled demo, try:
+```bash
+python -m pytest -q
+```
 
-| Query | Required skills | Expected result |
-|---|---|---|
-| `Python Docker` | `Python, Docker` | Candidate `M001`; 4 accepted evidence items |
-| `Recruitment Analytics Dashboard` | Leave empty | Candidate `M001`; 2 accepted evidence items |
-| `Kubernetes Terraform` | `Kubernetes, Terraform` | No eligible candidates |
+Some search, evaluation and multimodal workflows require locally prepared datasets, indexes and verification artifacts.
 
-Accepted evidence includes the field, source filename, page number, claim decision, and integrity status. The UI explicitly states that verified **CV mentions** are not independently confirmed qualifications.
-
-**Required local demo artifacts** include the scanned synthetic PDF, its extracted profile, and the protected real-vision verification report, such as:
+## Project Structure
 
 ```text
-data/multimodal/input/synthetic_scanned_cv.pdf
-data/multimodal/hybrid_profiles/synthetic_scanned_cv_profile.json
-data/multimodal/provenance/protected_real_vision_verification.json
+cv-intelligence/
+├── cv_intelligence/          # Core application package
+│   ├── api.py                # Main FastAPI application
+│   ├── protected_api.py      # Protected multimodal endpoint
+│   ├── dashboard.py          # Streamlit interface
+│   ├── prompts/              # LLM prompts, response chains and validation
+│   └── ...                   # Other application modules
+├── scripts/                  # Data preparation and experimental workflows
+│   ├── agentic_rag/          # Agentic RAG and response evaluation
+│   ├── data_preparation/     # Dataset download, ingestion and chunking
+│   ├── evaluation/           # Retrieval benchmarks and evaluation
+│   ├── graphrag/             # Knowledge graphs and GraphRAG experiments
+│   ├── llm/                  # Prompt engineering and claim validation
+│   ├── multimodal/           # Visual evidence and document verification
+│   ├── retrieval/            # Search and retrieval experiments
+│   └── utilities/            # Supporting utilities
+├── tests/                    # Automated tests and regression checks
+├── data/                     # Local datasets and generated artifacts
+├── pyproject.toml            # Project metadata and dependencies
+├── Dockerfile                # Container build configuration
+├── compose.yaml              # Container service configuration
+└── README.md                 # Project documentation
 ```
-
-If these are absent from your checkout, the protected demo must be prepared before it can run. Do not fabricate or hand-edit a verification report to bypass the verification workflow.
-
-## API examples
-
-### Health check
-
-```bash
-curl http://127.0.0.1:8001/health
-```
-
-### Agentic search
-
-```bash
-curl -X POST http://127.0.0.1:8001/search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"Python Docker engineer","limit":5}'
-```
-
-### Protected multimodal search
-
-```bash
-curl -X POST http://127.0.0.1:8001/multimodal/protected-search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"Python Docker","required_skills":["Python","Docker"]}'
-```
-
-The protected endpoint returns eligible candidates and accepted evidence; it does not expose arbitrary PDF-path selection to the caller. The demo's API response includes an evidence count for withheld items rather than exposing their unsupported text.
-
-
-## Prompt Engineering and LLM Validation
-
-### Features
-
-- Local Qwen 2.5 3B Instruct model through Ollama.
-- Evidence-grounded candidate skill extraction.
-- Structured JSON response validation.
-- Candidate ownership and skill-support verification.
-- PDF integrity checks in the protected workflow.
-- Detection of known prompt-injection patterns.
-- Verified skill locations with CV sections and page numbers.
-
-### Prompt Evaluation Results
-
-| Scenario | Result |
-|---|---|
-| Python skill extraction | Passed |
-| Python and Docker extraction | Passed |
-| Unsupported Kubernetes claim | Rejected by validator |
-| Kubernetes prompt injection | Rejected by validator |
-
-The four-case synthetic benchmark showed that Qwen proposed unsupported Kubernetes claims in two cases, but the validation layer rejected both.
-
-### Run the Local Qwen Demo
-
-```bash
-python -m scripts.llm.demo_secure_qwen
-```
-## Evaluation results
-
-The following results were observed in the **local, synthetic demonstration**, not on an external recruitment benchmark.
-
-| Evaluation | Observed result |
-|---|---|
-| Phase 6B profile consistency | 6/6 fields |
-| Phase 6B protected-evidence preparation and claim checks | Completed |
-| Phase 6C protected visual evidence | 6/6 supported |
-| Phase 6C document fingerprint | SHA-256 match |
-| Phase 6C protected queries | 3/3 passed |
-| Phase 6C integrity scenarios | 2/2 passed |
-| Phase 6C grounded-answer regression suite | 27/27 passed |
-| Phase 7 FastAPI routes | 3/3 verified |
-| Phase 7 protected HTTP query checks | 3/3 passed |
-| Phase 7 HTTP and grounded-answer tests | **39/39 passed** |
-| Phase 7 evaluation rerun | Passed twice in the development environment |
-
-The Phase 7 evaluation checked **six accepted evidence items across three test queries**. This is an in-sample controlled test, not a measure of generalization.
-
-A separate synthetic GraphRAG experiment reported **nDCG@5 of 0.890** for a BM25-plus-graph configuration. That result belongs to its specific synthetic benchmark and should not be compared directly with the protected multimodal test metrics.
-
-### Reproduce the evaluations
-
-With the necessary local synthetic inputs and saved verification artifacts available:
-
-```bash
-python -m scripts.evaluation.evaluate_phase_6c
-python -m scripts.evaluation.evaluate_phase_7
-```
-
-Run the focused regression suites:
-
-```bash
-python -m unittest tests.test_protected_api -v
-python -m unittest discover -s tests -p 'test_*grounded_answers.py' -v
-```
-
-The Phase 7 evaluation writes:
-
-```text
-data/multimodal/final_evaluation/phase_7_results.json
-data/multimodal/final_evaluation/phase_7_summary.md
-```
-
-The evaluation scripts reuse saved verification artifacts and **do not require new OpenAI API calls**. Creating a new protected visual-verification report is a separate, potentially billable workflow.
-
-## Evidence integrity and safety model
-
-The protected multimodal pipeline uses several safeguards:
-
-1. **Source binding:** Evidence must match the expected candidate, profile field, source document, and page.
-2. **Visual verification:** The saved protected report records whether the model supported, rejected, or could not determine each scanned-PDF evidence item.
-3. **Document fingerprinting:** SHA-256 checks compare the current PDF bytes with the bytes bound to the protected verification record.
-4. **Claim safety:** Only supported CV-mention claims are accepted. Fabricated, unsupported, or uncertain claims are rejected or withheld.
-5. **Fail-closed behavior:** Missing or modified source PDFs do not yield accepted evidence in the tested scenarios.
-6. **Provenance:** Accepted evidence retains its source filename and page number.
-
-A SHA-256 match establishes byte consistency with the stored fingerprint; it **does not authenticate who produced the verification report**. The prototype does not implement a complete trusted-report signing, authorization, or audit infrastructure.
-
-## Limitations and responsible use
-
-- **Synthetic data:** The protected multimodal evaluation uses one synthetic candidate represented by text and scanned PDFs. Broader accuracy, robustness, and generalization remain untested.
-- **Model fallibility:** Vision-based evidence verification can make mistakes; a supported status is not independent factual validation.
-- **Document mentions only:** A CV statement cannot establish proficiency, identity, job performance, or credential authenticity.
-- **No hiring automation:** Candidate results are research aids, not hiring decisions. Human review is required.
-- **Fairness and privacy:** Bias, adverse impact, consent, retention, and access controls have not been comprehensively evaluated.
-- **Local artifacts:** The prototype uses local data and reports. Public deployment would require authentication, authorization, secret management, audit logging, and secure storage.
-- **Performance:** Latency, throughput, concurrency, and production-scale reliability have not been established.
-- **Environment-dependent reproduction:** The protected demo requires the specific synthetic inputs and protected verification artifacts used in evaluation.
-
-**Do not upload real applicants' CVs or deploy this system for operational recruitment without appropriate privacy, security, legal, and fairness review.**
-
-## Suggested portfolio demonstration
-
-1. Show the **Agentic RAG Search** tab and the retrieved candidate's supporting CV excerpts.
-2. Switch to **Protected Multimodal Search** and run `Python Docker`.
-3. Open candidate `M001` and show the four accepted evidence items, PDF page provenance, and matching integrity status.
-4. Run `Kubernetes Terraform` to demonstrate that unsupported skills do not produce an eligible candidate.
-5. Run `python -m scripts.evaluation.evaluate_phase_7` and show the **39 passing tests** and saved Markdown evaluation report.
-6. Explain the distinction between **verified document mentions** and **independently validated qualifications**.
 
 ## Roadmap
 
-- Expand the multimodal benchmark beyond one synthetic candidate and add more document layouts.
-- Add independent human annotation and evaluate precision, recall, abstention quality, and calibration.
-- Introduce authenticated verification records, role-based access controls, and secure artifact storage.
-- Add automated browser tests and production-like deployment checks.
-- Perform privacy, fairness, and robustness assessments before considering real-world use.
+- **Incremental indexing:** Efficient BM25 and vector index updates for new, modified and deleted CVs.
+- **Retrieval scalability:** Persistent lexical indexing, caching, index synchronization and large-scale performance benchmarking.
+- **Persistent agent memory:** Session-aware conversations, LangGraph checkpointing and privacy-aware long-term memory.
+- **Retrieval optimization:** Reranking, adaptive chunking and context compression.
+- **Self-correcting RAG:** Explore bounded query reformulation and retrieval-quality assessment as a separate extension.
+- **LLM reliability:** Semantic validation of generated responses and expanded adversarial testing.
+- **Multimodal retrieval:** Broader visual-document benchmarks and ColPali-style retrieval.
 
-## License
+## Limitations and Responsible Use
 
-No license is specified here. Add a `LICENSE` file and update this section if you decide to publish the repository under an open-source license.
+CV Intelligence is a research and portfolio prototype evaluated primarily on synthetic data. A documented skill mention does not establish professional proficiency, verified experience or suitability for employment. Generated responses may contain inaccuracies and require human review.
 
----
-
-*CV Intelligence is an educational and research portfolio project focused on evidence traceability, retrieval quality, and safe handling of uncertain CV claims.*
+The application supports evidence-based candidate search, not autonomous hiring decisions. Production deployment requires further privacy, security, fairness and operational validation.
