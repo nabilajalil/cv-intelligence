@@ -20,10 +20,11 @@ def build_response_chain():
     """Construct the prompt, model and output parsing chain."""
 
     llm = ChatOllama(
-        model="qwen2.5:3b-instruct",
+        model="qwen2.5:7b",
         base_url="http://127.0.0.1:11434",
         temperature=0,
-        format="json",
+        client_kwargs={"timeout": 30},
+        format=PolishedResponse.model_json_schema(),
         num_ctx=MAX_CONTEXT_TOKENS,
         num_predict=MAX_OUTPUT_TOKENS,
     )

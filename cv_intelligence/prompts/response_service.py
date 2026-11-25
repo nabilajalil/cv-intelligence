@@ -1,6 +1,7 @@
 """Orchestrate constrained response polishing and fallback."""
 
 import json
+import os
 import time
 
 from .response_fallback import build_fallback_response
@@ -43,6 +44,70 @@ def polish_candidate_response(
             return result
 
         context = build_response_context(candidate)
+
+        if os.getenv("CV_RESPONSE_MODE", "constrained") == "generative":
+            from .response_chain import build_response_chain
+            from .response_polishing import (
+                RESPONSE_POLISHING_PROMPT,
+                PROMPT_VERSION as GENERATIVE_VERSION,
+            )
+            from .token_budget import (
+                estimate_tokens,
+                check_context_budget,
+                MAX_CONTEXT_TOKENS,
+                MAX_OUTPUT_TOKENS,
+            )
+
+            result["prompt_version"] = GENERATIVE_VERSION
+
+            serialized = json.dumps(context, ensure_ascii=False)
+
+            budget = check_context_budget(context)
+
+            messages = RESPONSE_POLISHING_PROMPT.format_messages(
+                context=serialized
+            )
+
+            estimated_total = (
+                sum(estimate_tokens(m.content) for m in messages)
+                + 128
+                + MAX_OUTPUT_TOKENS
+            )
+
+            budget["estimated_total_tokens"] = estimated_total
+            budget["within_budget"] = (
+                budget["within_budget"]
+                and estimated_total <= MAX_CONTEXT_TOKENS
+            )
+
+            result["token_budget"] = budget
+
+            if not budget["within_budget"]:
+                result["fallback_reason"] = "token_budget_exceeded"
+                return result
+
+            generator = build_response_chain()
+
+            generated = generator.invoke({
+                "context": serialized
+            })
+
+            summary = generated.summary.strip()
+
+            if not summary:
+                raise ValueError("Empty generated summary")
+
+            limitation = context["evidence_limitation"]
+
+            if limitation not in summary:
+                summary += "\n\n" + limitation
+
+            result.update({
+                "summary": summary,
+                "response_mode": "llm_generated_experimental",
+            })
+
+            return result
 
         budget = check_presentation_budget(context)
 
