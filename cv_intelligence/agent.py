@@ -1,4 +1,5 @@
 
+import os
 from typing import TypedDict
 
 from langgraph.graph import StateGraph, START, END
@@ -70,17 +71,37 @@ def evaluate_node(state: AgentState) -> dict:
 
 
 def summarize_node(state: AgentState) -> dict:
-    """Attach an evidence-grounded summary to each candidate."""
+    """Attach an evidence-grounded candidate summary."""
 
     summarized = []
 
+    polishing_enabled = (
+        os.getenv("CV_ENABLE_LLM_POLISHING", "false").lower()
+        == "true"
+    )
+
     for candidate in state["evaluated_candidates"]:
-        summarized.append(
-            {
+        if polishing_enabled:
+            from .prompts.response_service import (
+                polish_candidate_response,
+            )
+
+            response = polish_candidate_response(candidate)
+
+            summarized.append({
+                **candidate,
+                "summary": response["summary"],
+                "response_metadata": {
+                    key: value
+                    for key, value in response.items()
+                    if key != "summary"
+                },
+            })
+        else:
+            summarized.append({
                 **candidate,
                 "summary": summarize_candidate(candidate),
-            }
-        )
+            })
 
     return {"evaluated_candidates": summarized}
 

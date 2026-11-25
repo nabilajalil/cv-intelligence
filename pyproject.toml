@@ -28,6 +28,7 @@ agent = [
     "langchain-openai>=1,<2",
     "langchain-ollama>=1.2,<2",
     "langsmith>=0.15,<1",
+    "tiktoken>=0.8,<1",
 ]
 ui = [
     "streamlit>=1.40,<2",

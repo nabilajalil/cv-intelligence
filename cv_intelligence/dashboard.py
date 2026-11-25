@@ -224,6 +224,45 @@ def render_agentic_search():
                 )
             )
 
+            metadata = candidate.get("response_metadata")
+
+            if metadata:
+                with st.expander("AI response diagnostics"):
+                    st.write(
+                        "**Response mode:**",
+                        metadata.get("response_mode"),
+                    )
+                    st.write(
+                        "**Prompt version:**",
+                        metadata.get("prompt_version"),
+                    )
+                    st.write(
+                        "**Presentation style:**",
+                        metadata.get("selected_style"),
+                    )
+
+                    latency = metadata.get("latency_seconds")
+                    if latency is not None:
+                        st.metric(
+                            "Response latency",
+                            f"{latency:.3f} s",
+                        )
+
+                    usage = metadata.get("usage_metadata", {})
+                    if usage:
+                        st.json(usage)
+
+                    if metadata.get("fallback_reason"):
+                        st.info(
+                            "Deterministic fallback: "
+                            + metadata["fallback_reason"]
+                        )
+
+                    budget = metadata.get("token_budget", {})
+                    if budget:
+                        st.write("**Estimated token budget**")
+                        st.json(budget)
+
             with st.expander(
                 "View supporting CV evidence"
             ):
